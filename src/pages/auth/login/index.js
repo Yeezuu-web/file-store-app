@@ -41,6 +41,8 @@ import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 // ** Auth
 import useAuth from '../../../@core/lib/useAuth'
+import Error from 'src/@core/components/errors'
+import SimpleBackdrop from 'src/@core/layouts/components/back-drop'
 
 
 // ** Styled Components
@@ -65,7 +67,7 @@ const LoginPage = () => {
   // ** State
   const [ email , setEmail ] = useState('')
   const [ password , setPassword ] = useState('')
-  const [ remember_me , setRememberMe ] = useState(false)
+  const [ remember , setRemember ] = useState(false)
   const [ showPassword, setShowPassword ] = useState(false)
   const [errors, setErrors] = useState([])
 
@@ -83,8 +85,8 @@ const LoginPage = () => {
     setPassword(event.target.value)
   }
 
-  const handleChangeRememberMe = event => {
-      setRememberMe(event.target.checked)
+  const handleChangeRemember = event => {
+      setRemember(event.target.checked)
   }
 
   const handleClickShowPassword = () => {
@@ -98,14 +100,12 @@ const LoginPage = () => {
   const handleSumbit = async event => {
     event.preventDefault()
 
-    login({email, password, remember_me, setErrors});
+    login({email, password, remember, setErrors});
   }
 
-  console.log(errors)
-
   if (isLoading || user) {
-    return <>Loading...</>
-}
+    return <SimpleBackdrop handleLoading={isLoading} />
+  }
 
   return (
     <Box className='content-center'>
@@ -188,7 +188,7 @@ const LoginPage = () => {
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
-            <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
+            <Error errors={errors} />
           </Box>
           <form noValidate autoComplete='off' onSubmit={handleSumbit}>
             <TextField autoFocus fullWidth id='email' label='Email' value={email} onChange={handleChangeEmail} sx={{ marginBottom: 4 }} />
@@ -217,7 +217,7 @@ const LoginPage = () => {
             <Box
               sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
             >
-              <FormControlLabel control={<Checkbox />} label='Remember Me' checked={remember_me} onChange={handleChangeRememberMe} />
+              <FormControlLabel control={<Checkbox />} label='Remember Me' checked={remember} onChange={handleChangeRemember} />
               <Link passHref href='/'>
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>
@@ -236,7 +236,7 @@ const LoginPage = () => {
                 New on our platform?
               </Typography>
               <Typography variant='body2'>
-                <Link passHref href='/pages/register'>
+                <Link passHref href='/auth/register'>
                   <LinkStyled>Create an account</LinkStyled>
                 </Link>
               </Typography>

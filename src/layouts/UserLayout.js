@@ -15,6 +15,11 @@ import VerticalAppBarContent from './components/vertical/AppBarContent'
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
 
+// ** Lib Import 
+import useAuth from 'src/@core/lib/useAuth'
+import SimpleBackdrop from 'src/@core/layouts/components/back-drop'
+
+
 const UserLayout = ({ children }) => {
   // ** Hooks
   const { settings, saveSettings } = useSettings()
@@ -43,6 +48,13 @@ const UserLayout = ({ children }) => {
   //   )
   // }
 
+  // ** Auth middleware
+  const {isLoading, user, logout} = useAuth({middleware: 'auth'})
+
+  if (isLoading || !user) {
+    return <SimpleBackdrop handleLoading={isLoading} />
+  }
+
   return (
     <VerticalLayout
       hidden={hidden}
@@ -58,6 +70,8 @@ const UserLayout = ({ children }) => {
           settings={settings}
           saveSettings={saveSettings}
           toggleNavVisibility={props.toggleNavVisibility}
+          user={user}
+          logout={logout}
         />
       )}
     >

@@ -32,23 +32,30 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
   boxShadow: `0 0 0 2px ${theme.palette.background.paper}`
 }))
 
-const UserDropdown = () => {
+const UserDropdown = props => {
+  // ** Props
+  const { user, logout } = props
+
+  const roles = user.roles
+
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
-
-  // ** Hooks
-  const router = useRouter()
 
   const handleDropdownOpen = event => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleDropdownClose = url => {
-    if (url) {
-      router.push(url)
-    }
+  const handleDropdownClose = () => {
     setAnchorEl(null)
   }
+
+  const handlLogout = () => {
+    setAnchorEl(null)
+    
+    logout()
+  }
+
+  console.log(props);
 
   const styles = {
     py: 2,
@@ -98,10 +105,13 @@ const UserDropdown = () => {
               <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
-              <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
-                Admin
-              </Typography>
+              <Typography sx={{ fontWeight: 600 }}>{user.name}</Typography>
+              { roles.map(role => (
+                  <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }} key={role.id}>
+                    {role.title}
+                  </Typography>
+                ))
+              }
             </Box>
           </Box>
         </Box>
@@ -144,7 +154,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={() => handleDropdownClose('/pages/login')}>
+        <MenuItem sx={{ py: 2 }} onClick={() => handlLogout()}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
         </MenuItem>

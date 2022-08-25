@@ -16,7 +16,7 @@ import NotificationDropdown from 'src/@core/layouts/components/shared-components
 
 const AppBarContent = props => {
   // ** Props
-  const { hidden, settings, saveSettings, toggleNavVisibility } = props
+  const { hidden, settings, saveSettings, toggleNavVisibility, user, logout } = props
 
   // ** Hook
   const hiddenSm = useMediaQuery(theme => theme.breakpoints.down('sm'))
@@ -48,7 +48,7 @@ const AppBarContent = props => {
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
         <ModeToggler settings={settings} saveSettings={saveSettings} />
         <NotificationDropdown />
-        <UserDropdown />
+        <UserDropdown user={!user ? null : user} logout={logout} />
       </Box>
     </Box>
   )

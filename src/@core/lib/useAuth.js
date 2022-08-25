@@ -21,7 +21,7 @@ export default function useAuth({middleware} = {}) {
 
         axios
             .post('/api/login', props)
-            .then(() => mutate() && router.push('/'))
+            .then(() => mutate() && router.push('/dashboard'))
             .catch(error => {
                 if (error.response.status != 422) throw error
 

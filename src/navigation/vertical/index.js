@@ -15,33 +15,12 @@ const navigation = () => {
     {
       title: 'Dashboard',
       icon: HomeOutline,
-      path: '/'
+      path: '/dashboard'
     },
     {
       title: 'Account Settings',
       icon: AccountCogOutline,
       path: '/account-settings'
-    },
-    {
-      sectionTitle: 'Pages'
-    },
-    {
-      title: 'Login',
-      icon: Login,
-      path: '/auth/login',
-      openInNewTab: true
-    },
-    {
-      title: 'Register',
-      icon: AccountPlusOutline,
-      path: '/auth/register',
-      openInNewTab: true
-    },
-    {
-      title: 'Error',
-      icon: AlertCircleOutline,
-      path: '/auth/error',
-      openInNewTab: true
     },
     {
       sectionTitle: 'User Interface'
@@ -75,3 +54,28 @@ const navigation = () => {
 }
 
 export default navigation
+
+
+
+
+// {
+//   sectionTitle: 'Pages'
+// },
+// {
+//   title: 'Login',
+//   icon: Login,
+//   path: '/auth/login',
+//   openInNewTab: true
+// },
+// {
+//   title: 'Register',
+//   icon: AccountPlusOutline,
+//   path: '/auth/register',
+//   openInNewTab: true
+// },
+// {
+//   title: 'Error',
+//   icon: AlertCircleOutline,
+//   path: '/auth/error',
+//   openInNewTab: true
+// },
