@@ -9,7 +9,8 @@ export default function useAuth({middleware} = {}) {
     const [isLoading, setIsLoading] = useState(true);
 
     const {data: user, error, mutate} = useSWR('/user',
-        () => axios.get('/api/user').then(response => response.data.data)
+        () => axios.get('/api/user')
+            .then(response => response.data.data)
     )
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
@@ -44,6 +45,7 @@ export default function useAuth({middleware} = {}) {
 
         if (middleware == 'guest' && user) router.push('/dashboard')
         if (middleware == 'auth' && !user && error) router.push('/auth/login')
+
     }, [user, error])
 
     return {
