@@ -12,7 +12,7 @@ const columns = [
   {field: 'actions', headerName: 'Actions'}
 ]
 
-const DataTable = () => {
+const DataTableE = () => {
   const [ tableData, setTableData ] = useState([])
 
   const [ pageSize, setPageSize ] = useState(10)
@@ -30,13 +30,13 @@ const DataTable = () => {
       <Card>
         <CardContent sx={{
             p: '0 !important',
-          }}> 
+        }}>
           <Box sx={{
             mb: 4
           }}>
-            
+
           </Box>
-          <Box> 
+          <Box>
             <DataGrid
               autoHeight
               rows={tableData}
@@ -63,4 +63,4 @@ const DataTable = () => {
   )
 }
 
-export default DataTable
+export default DataTableE

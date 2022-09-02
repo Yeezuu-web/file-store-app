@@ -1,9 +1,25 @@
+import { Box, Card, CardContent } from '@mui/material'
 import React from 'react'
-import DataTable from 'src/views/users/DataTable'
+import UserTable from 'src/views/users/UserTable'
 
 const Users = () => {
   return (
-    <DataTable />
+    <>
+      <Card>
+        <CardContent sx={{
+          p: '0 !important',
+        }}>
+          <Box sx={{
+            mb: 4
+          }}>
+
+          </Box>
+          <Box>
+            <UserTable />
+          </Box>
+        </CardContent>
+      </Card>
+    </>
   )
 }
 
